@@ -1,0 +1,42 @@
+name: todolist-create-tomorrow-reminder
+purpose: Baseline FreshEye validation on a short, objectively checkable task flow.
+
+recommended_mode: panel
+personas:
+  - fresh-first-timer
+  - wechat-casual-user
+  - busy-parent
+repetitions_per_persona: 3
+
+target:
+  kind: web
+  entry_point: http://localhost:3000
+  environment: local
+
+task:
+  instruction: Create a task called “取快递” for tomorrow at 3 PM, then return to the main task list.
+  max_steps: 20
+  max_duration_seconds: 180
+  user_success_definition:
+    - the task is visible in the product
+    - tomorrow and 3 PM are visibly associated with the task
+    - the user can tell whether the work was saved
+
+runtime:
+  viewport:
+    width: 390
+    height: 844
+  browser_state: fresh
+  login_state: fixture
+  account_fixture: one empty test account per repetition
+
+safety:
+  forbidden_actions:
+    - access real user data
+    - send external notifications
+    - delete records outside the test fixture
+
+notes_for_orchestrator:
+  - Do not tell runners where the create control is.
+  - Do not mention the date picker, reminder implementation, or recent UI changes.
+  - Reset account data and browser state before every repetition.
