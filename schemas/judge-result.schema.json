@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ericwong5021/fresheye/schemas/judge-result.schema.json",
+  "title": "FreshEye Judge Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "synthetic_status",
+    "isolation_achieved",
+    "valid_repetitions",
+    "contaminated_repetitions",
+    "outcomes",
+    "scores",
+    "findings",
+    "disagreements",
+    "limitations",
+    "real_user_validation_questions"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "run_id": {"type": "string", "minLength": 1},
+    "synthetic_status": {"const": "hypothesis"},
+    "isolation_achieved": {"enum": ["L0", "L1", "L2", "L3", "L4", "L5"]},
+    "valid_repetitions": {"type": "integer", "minimum": 0},
+    "contaminated_repetitions": {"type": "integer", "minimum": 0},
+    "outcomes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["completed", "partial", "failed"],
+      "properties": {
+        "completed": {"type": "integer", "minimum": 0},
+        "partial": {"type": "integer", "minimum": 0},
+        "failed": {"type": "integer", "minimum": 0}
+      }
+    },
+    "scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["seq", "end_confidence", "trust"],
+      "properties": {
+        "seq": {"$ref": "#/$defs/distribution7"},
+        "end_confidence": {"$ref": "#/$defs/distribution5"},
+        "trust": {"$ref": "#/$defs/distribution5"}
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/finding"}
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "limitations": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "real_user_validation_questions": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  },
+  "$defs": {
+    "distribution5": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["values", "median"],
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1, "maximum": 5}
+        },
+        "median": {"type": ["number", "null"], "minimum": 1, "maximum": 5}
+      }
+    },
+    "distribution7": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["values", "median"],
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 1, "maximum": 7}
+        },
+        "median": {"type": ["number", "null"], "minimum": 1, "maximum": 7}
+      }
+    },
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "status",
+        "evidence_status",
+        "classification",
+        "severity",
+        "reproducibility",
+        "persona_ids",
+        "trace_refs",
+        "evidence_refs",
+        "observation",
+        "user_impact",
+        "product_hypothesis",
+        "uncertainty"
+      ],
+      "properties": {
+        "id": {"type": "string", "pattern": "^FE-[0-9]+$"},
+        "title": {"type": "string", "minLength": 1},
+        "status": {"enum": ["hypothesis", "validated", "contradicted"]},
+        "evidence_status": {"enum": ["observed", "inferred", "unverified"]},
+        "classification": {
+          "enum": ["universal", "primary-persona", "segment", "edge-case", "candidate", "non-issue", "unverified"]
+        },
+        "severity": {"type": "integer", "minimum": 0, "maximum": 4},
+        "reproducibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["affected", "valid_repetitions"],
+          "properties": {
+            "affected": {"type": "integer", "minimum": 0},
+            "valid_repetitions": {"type": "integer", "minimum": 0}
+          }
+        },
+        "persona_ids": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "trace_refs": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "observation": {"type": "string"},
+        "user_impact": {"type": "string"},
+        "product_hypothesis": {"type": "string"},
+        "uncertainty": {"type": "string"}
+      }
+    }
+  }
+}
