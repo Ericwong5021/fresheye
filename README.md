@@ -1,5 +1,7 @@
 # FreshEye
 
+[简体中文](./README.zh-CN.md)
+
 **Persona-driven blind usability testing for Codex.**
 
 FreshEye asks a simple question traditional software testing often misses:
