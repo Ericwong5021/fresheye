@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ericwong5021/fresheye/schemas/manifest.schema.json",
+  "title": "FreshEye Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "run_id",
+    "mode",
+    "isolation_target",
+    "target",
+    "persona",
+    "task",
+    "runtime",
+    "safety",
+    "evidence"
+  ],
+  "properties": {
+    "run_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string"},
+    "mode": {
+      "enum": ["test", "panel", "regress", "inspect"]
+    },
+    "isolation_target": {
+      "enum": ["L1", "L2", "L3", "L4", "L5"]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "entry_point", "environment"],
+      "properties": {
+        "kind": {"enum": ["web", "desktop", "artifact"]},
+        "entry_point": {"type": "string", "minLength": 1},
+        "environment": {"enum": ["local", "preview", "staging", "production", "artifact"]}
+      }
+    },
+    "persona": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "pack", "version"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "pack": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instruction", "max_steps", "max_duration_seconds"],
+      "properties": {
+        "instruction": {"type": "string", "minLength": 1},
+        "max_steps": {"type": "integer", "minimum": 1, "maximum": 100},
+        "max_duration_seconds": {"type": "integer", "minimum": 1, "maximum": 3600}
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["browser_state", "login_state", "repetitions"],
+      "properties": {
+        "viewport": {
+          "oneOf": [
+            {"type": "string"},
+            {
+              "type": "object",
+              "required": ["width", "height"],
+              "properties": {
+                "width": {"type": "integer", "minimum": 240},
+                "height": {"type": "integer", "minimum": 240}
+              }
+            }
+          ]
+        },
+        "browser_state": {"enum": ["fresh", "returning", "fixture"]},
+        "login_state": {"enum": ["logged_out", "logged_in", "fixture"]},
+        "repetitions": {"type": "integer", "minimum": 1, "maximum": 20}
+      }
+    },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forbidden_actions"],
+      "properties": {
+        "forbidden_actions": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screenshots", "trace"],
+      "properties": {
+        "screenshots": {"type": "boolean"},
+        "trace": {"type": "boolean"},
+        "video": {"type": "boolean"}
+      }
+    }
+  }
+}
