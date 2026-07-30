@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Ericwong5021/fresheye/schemas/runner-result.schema.json",
+  "title": "FreshEye Runner Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "runner_id",
+    "persona_id",
+    "status",
+    "task_outcome",
+    "steps_taken",
+    "trace",
+    "tools_used",
+    "forbidden_access_detected",
+    "evidence_refs",
+    "uncertainties"
+  ],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "runner_id": {"type": "string", "minLength": 1},
+    "persona_id": {"type": "string", "minLength": 1},
+    "status": {
+      "enum": ["completed", "partial", "abandoned", "blocked", "contaminated"]
+    },
+    "task_outcome": {"type": "string"},
+    "steps_taken": {"type": "integer", "minimum": 0},
+    "abandonment_reason": {"type": ["string", "null"]},
+    "tools_used": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "forbidden_access_detected": {"type": "boolean"},
+    "contamination_reason": {"type": ["string", "null"]},
+    "evidence_refs": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "trace": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/traceEvent"}
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"status": {"const": "contaminated"}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "forbidden_access_detected": {"const": true},
+          "contamination_reason": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "traceEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "step",
+        "timestamp_or_order",
+        "visible_clues",
+        "expectation",
+        "action",
+        "observed_result",
+        "confidence_before",
+        "confidence_after",
+        "friction"
+      ],
+      "properties": {
+        "step": {"type": "integer", "minimum": 1},
+        "timestamp_or_order": {"type": "string"},
+        "visible_clues": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "expectation": {"type": "string"},
+        "action": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "target_description"],
+          "properties": {
+            "type": {
+              "enum": ["click", "type", "scroll", "navigate", "wait", "back", "abandon", "other"]
+            },
+            "target_description": {"type": "string"},
+            "value_description": {"type": "string"}
+          }
+        },
+        "observed_result": {"type": "string"},
+        "confidence_before": {"type": "integer", "minimum": 1, "maximum": 5},
+        "confidence_after": {"type": "integer", "minimum": 1, "maximum": 5},
+        "friction": {"type": ["string", "null"]},
+        "evidence_ref": {"type": ["string", "null"]},
+        "interpretation": {"type": "string"},
+        "recovery_attempt": {"type": "boolean"},
+        "error_type": {
+          "enum": ["misunderstanding", "slip", "functional", "environment", "unknown"]
+        },
+        "safety_stop": {"type": "boolean"}
+      }
+    }
+  }
+}
