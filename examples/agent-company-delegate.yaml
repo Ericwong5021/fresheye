@@ -1,0 +1,44 @@
+name: agent-company-delegate-product-goal
+purpose: Test whether a founder can delegate an outcome and understand progress without learning the internal agent organization.
+
+recommended_mode: panel
+personas:
+  - solo-founder-delegator
+  - skeptical-technical-operator
+  - non-agent-manager
+repetitions_per_persona: 2
+
+target:
+  kind: web
+  entry_point: http://localhost:3000
+  environment: local
+
+task:
+  instruction: Ask the system to create a practical launch plan for a new AI hardware product. Determine whether the work has started, find the current progress, and identify whether you need to make any decision.
+  max_steps: 30
+  max_duration_seconds: 300
+  user_success_definition:
+    - a goal is submitted without requiring multi-agent terminology
+    - the user can tell whether execution has started
+    - progress, blockers, and required user decisions are distinguishable
+    - the user can locate the expected deliverable or understand when it will be available
+
+runtime:
+  viewport:
+    width: 1440
+    height: 900
+  browser_state: fresh
+  login_state: fixture
+  account_fixture: isolated empty workspace per repetition
+
+safety:
+  forbidden_actions:
+    - send external messages
+    - publish content
+    - modify external repositories
+    - purchase services
+
+notes_for_orchestrator:
+  - Do not explain the board, department, recruitment, or agent hierarchy to runners.
+  - Do not reveal the intended workflow or where progress is displayed.
+  - The runner may stop when its Persona would reasonably conclude that the system is not understandable.
