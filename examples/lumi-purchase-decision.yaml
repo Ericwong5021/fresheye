@@ -1,0 +1,45 @@
+name: lumi-parent-purchase-decision
+purpose: Test whether parents can understand Lumi's value, fit, cost, and trust boundaries from public product pages.
+
+recommended_mode: panel
+personas:
+  - curious-parent-buyer
+  - safety-conscious-parent
+repetitions_per_persona: 3
+
+target:
+  kind: web
+  entry_point: https://example.com
+  environment: staging
+
+task:
+  instruction: Decide whether this product is suitable for a four-year-old child. Find what the child can do with it, whether there are ongoing fees, and how voice data and parent controls are handled. Stop before making a real purchase.
+  max_steps: 25
+  max_duration_seconds: 300
+  user_success_definition:
+    - the parent can explain the product in ordinary language
+    - the parent can identify at least one concrete child experience
+    - age suitability is understandable
+    - price and subscription expectations are understandable
+    - privacy and parent-control information can be located
+    - the parent can make a purchase or rejection decision with stated reasons
+
+runtime:
+  viewport:
+    width: 390
+    height: 844
+  browser_state: fresh
+  login_state: logged_out
+
+safety:
+  forbidden_actions:
+    - complete a real purchase
+    - submit real personal information
+    - contact customer support
+    - subscribe to marketing
+
+notes_for_orchestrator:
+  - Replace the example URL with the actual preview or staging site.
+  - Do not tell runners which page contains privacy or subscription information.
+  - Do not describe Lumi as better than a story player in the runner prompt.
+  - This test covers the parent buying journey, not child voice interaction.
