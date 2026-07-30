@@ -1,0 +1,118 @@
+pack: agent-company
+version: 0.1.0
+purpose: Personas for multi-agent work orchestration products such as AgentCompany.
+
+personas:
+  - id: solo-founder-delegator
+    name: Solo founder delegating outcomes
+    role: primary
+    identity:
+      occupation: independent founder
+      technical_literacy: medium-high
+      ai_experience: high
+      multi_agent_experience: low-medium
+    situation:
+      time_available: low
+      attention: checks progress intermittently
+      responsibility: owns final business outcome
+    goals:
+      primary: describe an ambiguous goal and receive a usable result
+      secondary:
+        - know whether work has started
+        - intervene only when a real decision is required
+        - verify the final artifact without reading internal chatter
+    success_definition:
+      - current state is understandable in under one minute
+      - required founder decisions are explicit and bounded
+      - final deliverables and evidence are easy to locate
+    mental_model:
+      product_as: a remote team, not a developer console
+      knows:
+        - goals, priorities, business constraints, and expected deliverables
+        - AI systems can make mistakes
+      does_not_know:
+        - internal agent hierarchy
+        - why departments recruit or message each other
+        - prompt and context-management mechanics
+    behavior:
+      reading_patience: low
+      exploration_tendency: medium-low
+      risk_tolerance: medium
+      error_recovery: asks for status once, then loses confidence
+      trust_posture: outcome-oriented
+    abandonment_conditions:
+      - must continuously watch agent conversations
+      - cannot tell whether work is active, blocked, or finished
+      - the system asks for decisions without explaining consequences
+      - completion is claimed without a usable artifact or evidence
+
+  - id: skeptical-technical-operator
+    name: Skeptical technical operator
+    role: risk
+    identity:
+      occupation: senior engineer or technical founder
+      technical_literacy: high
+      ai_experience: high
+      multi_agent_experience: medium
+    situation:
+      stakes: repository and production integrity
+      attention: analytical
+    goals:
+      primary: delegate work without losing technical control
+      secondary:
+        - inspect plans and high-impact decisions
+        - understand what changed
+        - verify tests and evidence
+        - stop or reverse unsafe actions
+    mental_model:
+      product_as: an autonomous engineering team requiring auditability
+      knows:
+        - software development workflows
+        - agents may report completion prematurely
+      does_not_know:
+        - whether this system enforces permissions and verification
+    behavior:
+      reading_patience: high for evidence, low for ceremonial conversation
+      exploration_tendency: high
+      risk_tolerance: low
+      error_recovery: strong
+      trust_posture: distrusts unsupported claims
+    abandonment_conditions:
+      - actions occur without visible scope or approval boundaries
+      - there is no audit trail or test evidence
+      - status language is vague or contradictory
+      - rollback, cancellation, or intervention is unclear
+
+  - id: non-agent-manager
+    name: Manager unfamiliar with agent systems
+    role: secondary
+    identity:
+      occupation: product or operations manager
+      technical_literacy: medium
+      ai_experience: basic
+      multi_agent_experience: none
+    situation:
+      goal_orientation: coordinate work and make decisions
+      attention: intermittent
+    goals:
+      primary: start a project and know what happens next
+      secondary:
+        - understand responsibility and progress
+        - know when input is required
+        - review the result
+    mental_model:
+      product_as: project management software with an executing team
+      knows:
+        - projects, tasks, owners, milestones, blockers, and deliverables
+      does_not_know:
+        - agents, context windows, prompts, boards, departments, or synthetic organizations
+    behavior:
+      reading_patience: medium-low
+      exploration_tendency: low
+      risk_tolerance: medium-low
+      error_recovery: moderate when plain-language guidance exists
+      trust_posture: expects familiar project language
+    abandonment_conditions:
+      - primary concepts require understanding multi-agent architecture
+      - current responsibility or next action is ambiguous
+      - internal process is presented instead of user-relevant progress
