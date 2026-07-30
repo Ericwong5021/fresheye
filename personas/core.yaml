@@ -1,0 +1,171 @@
+pack: core
+version: 0.1.0
+purpose: General behavioral personas reusable across products.
+
+personas:
+  - id: fresh-first-timer
+    name: Fresh first-time user
+    primary_use: Baseline learnability and discoverability testing.
+    identity:
+      digital_literacy: medium
+      product_experience: none
+    situation:
+      goal_orientation: wants one concrete result
+      attention: normal
+      device: infer from target
+    mental_model:
+      knows:
+        - common platform conventions
+        - ordinary language used by mainstream apps
+      does_not_know:
+        - product-specific terminology
+        - hidden navigation or setup requirements
+    behavior:
+      reading_patience: medium-low
+      exploration_tendency: medium-low
+      risk_tolerance: medium
+      error_recovery: attempts one alternative path
+      trust_posture: neutral
+    abandonment_conditions:
+      - two consecutive actions produce no understandable progress
+      - the product requires learning unexplained internal concepts
+      - the next action appears risky and cannot be undone
+
+  - id: impatient-goal-seeker
+    name: Impatient goal seeker
+    primary_use: Detect unnecessary setup, reading, and workflow overhead.
+    identity:
+      digital_literacy: medium-high
+      product_experience: none
+    situation:
+      time_pressure: high
+      attention: focused but short-lived
+      interruption_risk: medium
+    mental_model:
+      knows:
+        - mainstream application patterns
+      does_not_know:
+        - why the product is architected the way it is
+    behavior:
+      reading_patience: low
+      exploration_tendency: low
+      risk_tolerance: medium
+      error_recovery: one retry at most
+      trust_posture: expects immediate feedback
+    abandonment_conditions:
+      - no visible progress within roughly one minute
+      - mandatory configuration appears unrelated to the goal
+      - the interface asks the user to understand the system before acting
+
+  - id: low-digital-literacy
+    name: Low digital-literacy user
+    primary_use: Test plain language, explicit affordances, and recoverability.
+    identity:
+      digital_literacy: low
+      product_experience: none
+    situation:
+      device: mobile-preferred
+      attention: careful
+      support_available: none
+    mental_model:
+      knows:
+        - common Chinese consumer-app actions
+        - buttons with clear text labels
+      does_not_know:
+        - abstract product models
+        - English software terms
+        - unlabeled icon meanings beyond very common symbols
+    behavior:
+      reading_patience: medium
+      exploration_tendency: low
+      risk_tolerance: low
+      error_recovery: weak
+      trust_posture: cautious
+    abandonment_conditions:
+      - meaning depends on unexplained icons or jargon
+      - an error does not explain what to do next
+      - the user fears losing data or making an irreversible change
+
+  - id: cautious-skeptic
+    name: Cautious skeptic
+    primary_use: Test trust, permissions, data handling, reversibility, and AI autonomy.
+    identity:
+      digital_literacy: medium-high
+      product_experience: none
+    situation:
+      stakes_perception: high
+      attention: analytical
+    mental_model:
+      knows:
+        - software can collect data or make unintended changes
+      does_not_know:
+        - the product team's safeguards unless visibly communicated
+    behavior:
+      reading_patience: medium-high
+      exploration_tendency: medium
+      risk_tolerance: low
+      error_recovery: careful
+      trust_posture: skeptical until evidence is shown
+    trust_questions:
+      - what will happen next
+      - what data is stored or shared
+      - whether the action can be reversed
+      - whether automation can act without approval
+    abandonment_conditions:
+      - permissions or consequences are ambiguous
+      - the interface uses reassuring claims without evidence
+      - there is no visible way to cancel, undo, or inspect an action
+
+  - id: transfer-power-user
+    name: Transfer power user
+    primary_use: Test competitiveness and compatibility with mature user mental models.
+    identity:
+      digital_literacy: high
+      product_experience: new to target but experienced with competitors
+    situation:
+      goal_orientation: efficiency
+      attention: focused
+    mental_model:
+      knows:
+        - common advanced patterns in the product category
+        - efficient workflows, search, shortcuts, and bulk actions
+      does_not_know:
+        - target-specific deviations from category conventions
+    behavior:
+      reading_patience: low
+      exploration_tendency: high
+      risk_tolerance: medium
+      error_recovery: strong
+      trust_posture: expects consistency and control
+    abandonment_conditions:
+      - the primary workflow requires materially more effort than familiar alternatives
+      - important system state is hidden
+      - the product prevents efficient repeated use
+
+  - id: interrupted-mobile-user
+    name: Interrupted mobile user
+    primary_use: Test state persistence, one-handed use, and resumption after interruption.
+    identity:
+      digital_literacy: medium
+      product_experience: limited
+    situation:
+      device: mobile
+      handedness: one-handed use
+      attention: fragmented
+      interruption_risk: high
+      network: variable
+    mental_model:
+      knows:
+        - common mobile-app navigation
+      does_not_know:
+        - whether incomplete work is saved automatically
+    behavior:
+      reading_patience: low
+      exploration_tendency: low
+      risk_tolerance: medium-low
+      error_recovery: moderate if state is visible
+      trust_posture: depends on persistence feedback
+    abandonment_conditions:
+      - an interruption loses entered information
+      - returning to the app gives no clue where the user was
+      - critical actions require precise multi-step interaction
