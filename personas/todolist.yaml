@@ -1,0 +1,154 @@
+pack: todolist
+version: 0.1.0
+purpose: Personas for lightweight task, reminder, and personal productivity products.
+
+personas:
+  - id: wechat-casual-user
+    name: Casual WeChat user
+    role: primary
+    identity:
+      digital_literacy: medium-low
+      productivity_app_experience: low
+      familiar_products:
+        - WeChat
+        - mobile calendar
+        - simple notes
+    situation:
+      device: mobile
+      attention: short sessions
+    goals:
+      primary: quickly record something that must be done
+      secondary:
+        - see what matters today
+        - mark work complete
+        - change a date without learning a system
+    mental_model:
+      product_as: a list of things with optional times
+      knows:
+        - add, edit, delete, complete
+      does_not_know:
+        - inbox methodology
+        - areas, contexts, filters, or advanced project models
+    behavior:
+      reading_patience: low
+      exploration_tendency: low
+      risk_tolerance: medium-low
+      error_recovery: weak-medium
+      trust_posture: expects obvious saving and feedback
+    abandonment_conditions:
+      - creating a basic task requires classification first
+      - the interface depends on productivity jargon
+      - it is unclear whether the task was saved
+
+  - id: busy-parent
+    name: Busy parent capturing tasks
+    role: primary
+    identity:
+      occupation: working parent
+      digital_literacy: medium
+      productivity_app_experience: basic
+    situation:
+      device: mobile
+      handedness: often one-handed
+      attention: fragmented
+      interruption_risk: high
+      context: commuting, childcare, or household coordination
+    goals:
+      primary: capture a task within seconds
+      secondary:
+        - add timing later
+        - recover after interruption
+        - avoid losing partially entered content
+    success_definition:
+      - basic capture requires minimal decisions
+      - entered content survives interruption
+      - date and reminder state are understandable
+    mental_model:
+      product_as: an external memory
+      knows:
+        - reminders and calendar dates
+      does_not_know:
+        - formal productivity methods
+    behavior:
+      reading_patience: very-low
+      exploration_tendency: low
+      risk_tolerance: medium
+      error_recovery: low when interrupted
+      trust_posture: depends on visible persistence
+    abandonment_conditions:
+      - capture takes more than a few obvious steps
+      - interrupted input disappears
+      - the product asks for organization before saving
+
+  - id: things-migrator
+    name: Things or Todoist power-user
+    role: secondary
+    identity:
+      digital_literacy: high
+      productivity_app_experience: high
+      familiar_products:
+        - Things
+        - Todoist
+        - TickTick
+    situation:
+      device: desktop and mobile
+      use_frequency: daily
+    goals:
+      primary: assess whether the product supports efficient repeated use
+      secondary:
+        - rapid capture
+        - today planning
+        - project organization
+        - natural date handling
+        - predictable editing
+    mental_model:
+      product_as: a mature personal task system
+      knows:
+        - inbox, today, projects, deadlines, reminders, search, shortcuts
+      does_not_know:
+        - target-specific conventions
+    behavior:
+      reading_patience: low
+      exploration_tendency: high
+      risk_tolerance: medium
+      error_recovery: strong
+      trust_posture: expects speed, state clarity, and consistency
+    abandonment_conditions:
+      - common actions require substantially more effort than mature alternatives
+      - keyboard or repeated workflows are inefficient
+      - project and date semantics are inconsistent
+
+  - id: offline-returning-user
+    name: Offline returning user
+    role: risk
+    identity:
+      digital_literacy: medium
+      productivity_app_experience: medium
+    situation:
+      devices:
+        - mobile
+        - second device
+      network: weak or intermittent
+      session_pattern: creates tasks offline and returns later
+    goals:
+      primary: trust that work is retained and synchronized
+      secondary:
+        - understand pending sync
+        - recover from conflicts
+        - know which version is current
+    mental_model:
+      product_as: a dependable personal record
+      knows:
+        - cloud sync can be delayed
+      does_not_know:
+        - revisions, outboxes, cursors, or conflict algorithms
+    behavior:
+      reading_patience: medium
+      exploration_tendency: medium
+      risk_tolerance: low around data loss
+      error_recovery: moderate with clear status
+      trust_posture: highly sensitive to silent overwrite
+    abandonment_conditions:
+      - offline edits appear lost
+      - sync status is invisible or contradictory
+      - conflict resolution uses implementation language
