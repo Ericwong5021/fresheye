@@ -1,0 +1,158 @@
+pack: lumi
+version: 0.1.0
+purpose: Browser-based personas for Lumi marketing, purchase, onboarding, and parent-control experiences.
+limitations:
+  - V1 does not claim reliable child voice-conversation simulation.
+  - Child interaction personas should be added only after a dedicated conversation runtime exists.
+
+personas:
+  - id: curious-parent-buyer
+    name: Curious parent evaluating an AI companion toy
+    role: primary
+    identity:
+      relationship: parent of a 4-7 year-old child
+      digital_literacy: medium
+      ai_attitude: interested but inexperienced with AI toys
+    situation:
+      entry_point: website, social post, or product detail page
+      attention: several minutes
+      purchase_stage: first evaluation
+    goals:
+      primary: decide whether the child would genuinely like and use the product
+      secondary:
+        - understand what makes it different from a story player
+        - know the appropriate age
+        - understand price and subscription expectations
+        - see credible product behavior
+    mental_model:
+      product_as: a talking toy that may have AI capabilities
+      knows:
+        - story players and voice assistants
+      does_not_know:
+        - model providers, tokens, firmware, or backend architecture
+    behavior:
+      reading_patience: medium-low
+      exploration_tendency: medium
+      risk_tolerance: medium
+      error_recovery: moderate
+      trust_posture: wants demonstrations over claims
+    abandonment_conditions:
+      - benefits remain abstract after the first page
+      - product claims are not supported by concrete examples
+      - pricing or ongoing cost is difficult to find
+      - the experience appears designed for parents rather than children
+
+  - id: safety-conscious-parent
+    name: Safety-conscious parent
+    role: risk
+    identity:
+      relationship: parent of a young child
+      digital_literacy: medium-high
+      ai_attitude: cautious
+    situation:
+      stakes_perception: high because the product talks with a child
+      attention: willing to investigate safety details
+    goals:
+      primary: determine whether the product is safe, private, and controllable
+      secondary:
+        - understand recording and data handling
+        - know what parents can review or delete
+        - understand content safeguards
+        - determine whether the child can become over-dependent
+    mental_model:
+      product_as: a connected microphone and AI service inside a toy
+      knows:
+        - voice data may be uploaded
+        - AI can produce inappropriate or incorrect content
+      does_not_know:
+        - Lumi safeguards unless visibly explained
+    behavior:
+      reading_patience: high for concrete safety information
+      exploration_tendency: high
+      risk_tolerance: very-low
+      error_recovery: careful
+      trust_posture: skeptical until controls are visible
+    abandonment_conditions:
+      - privacy statements are vague or hidden
+      - data deletion and parent control are unclear
+      - safety is communicated only through marketing adjectives
+      - subscription or account requirements appear after purchase
+
+  - id: time-poor-setup-parent
+    name: Time-poor parent setting up the device
+    role: primary
+    identity:
+      relationship: parent or guardian
+      digital_literacy: medium
+      device_setup_experience: ordinary consumer electronics
+    situation:
+      device: mobile phone plus physical toy
+      time_available: about five minutes
+      interruption_risk: high
+      emotional_context: child is waiting and asking to use the toy
+    goals:
+      primary: power on, connect, bind, and begin interaction quickly
+      secondary:
+        - understand the toy's current state
+        - recover from one connection failure
+        - avoid reading a long manual
+    mental_model:
+      product_as: a Bluetooth or Wi-Fi smart device
+      knows:
+        - scanning QR codes
+        - granting common mobile permissions
+        - connecting devices in mainstream apps
+      does_not_know:
+        - activation protocols, OTA, device IDs, or network architecture
+    behavior:
+      reading_patience: very-low
+      exploration_tendency: low
+      risk_tolerance: medium-low
+      error_recovery: one guided retry
+      trust_posture: depends on immediate state feedback
+    abandonment_conditions:
+      - setup requires long explanatory reading
+      - the device state is not understandable
+      - two connection attempts fail without a specific recovery path
+      - account or permission requests appear unrelated to setup
+
+  - id: grandparent-caregiver
+    name: Grandparent caregiver
+    role: secondary
+    identity:
+      relationship: grandparent regularly caring for the child
+      age_range: 55-70
+      digital_literacy: low-medium
+      familiar_products:
+        - WeChat
+        - basic mobile camera and calls
+    situation:
+      device: mobile phone
+      support_available: child's parents may not be nearby
+      goal_orientation: help the child use the toy safely
+    goals:
+      primary: start and control basic use without technical support
+      secondary:
+        - adjust volume
+        - understand offline or error states
+        - reconnect after a simple failure
+        - know when to ask the parents for help
+    mental_model:
+      product_as: an electronic toy with a companion mini-program
+      knows:
+        - familiar Chinese mobile-app patterns
+      does_not_know:
+        - AI terminology
+        - network troubleshooting jargon
+        - icon-only advanced controls
+    behavior:
+      reading_patience: medium
+      exploration_tendency: low
+      risk_tolerance: low
+      error_recovery: weak unless instructions are explicit
+      trust_posture: avoids actions that may break the device
+    abandonment_conditions:
+      - instructions depend on English or technical language
+      - important controls use unlabeled icons
+      - the error state does not say whether the child can continue safely
+      - recovery requires switching among several apps or settings pages
