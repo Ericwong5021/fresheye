@@ -1,0 +1,8 @@
+interface:
+  display_name: "FreshEye"
+  short_description: "Blind persona-driven UI testing with isolated Codex subagents"
+  brand_color: "#2F6F64"
+  default_prompt: "Run a FreshEye blind usability test using isolated runner and judge subagents."
+
+policy:
+  allow_implicit_invocation: false
